@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from io import BytesIO
 import base64
-
+import io
 # Load the car prices dataset (this should be moved to a model or stored in DB for production)
 data = pd.read_csv("car_prices.csv")
 
@@ -55,7 +55,7 @@ def predict_car_price(request):
 
     return render(request, 'predict.html')
 
-def visualize_data(request):
+def visualize_heatmap(request):
     # Create correlation heatmap
     numeric_data = data.select_dtypes(include=[np.number])
     plt.figure(figsize=(10, 8))
@@ -72,3 +72,29 @@ def visualize_data(request):
     image_b64 = base64.b64encode(image_png).decode('utf-8')
 
     return render(request, 'visualize.html', {'image': image_b64})
+
+def visualize_boxplot(request):
+    # Set the figure size for better clarity
+    plt.figure(figsize=(25, 15))
+    plt.title("(fig-1) Relation Between Makes and Price")
+    
+    # Generate the box plot
+    sns.boxplot(x='make', y='price', data=data)
+    
+    # Save the plot to a bytes buffer
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    
+    # Convert the bytes buffer to a base64 string
+    image_png = buffer.getvalue()
+    buffer.close()
+    
+    # Encode the base64 string
+    graphic = base64.b64encode(image_png).decode('utf-8')
+    
+    # Clear the current plot to prevent overlap in future calls
+    plt.clf()
+    
+    # Render the box plot template
+    return render(request, 'visualize_boxplot.html', {'image': graphic})

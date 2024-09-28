@@ -97,6 +97,13 @@
             <h4>Predicted Price: ${{ predicted_price }}</h4>
         </div>
         {% endif %}
+        
+        <div class="mt-5 text-center">
+            <h2>Visualizations</h2>
+            <a href="{% url 'visualize_heatmap' %}" class="btn btn-info">View Correlation Heatmap</a>
+            <a href="{% url 'visualize_boxplot' %}" class="btn btn-info">View Box Plot of Makes vs Price</a>
+        </div>
+        
     </div>
 
     <!-- Bootstrap JS -->
