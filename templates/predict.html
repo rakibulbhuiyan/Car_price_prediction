@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Car Price</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Predict Car Price</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="engine-size">Engine Size:</label>
+                    <input type="number" class="form-control" name="engine-size" step="0.01" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="horsepower">Horsepower:</label>
+                    <input type="number" class="form-control" name="horsepower" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="city-mpg">City MPG:</label>
+                    <input type="number" class="form-control" name="city-mpg" step="0.01" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="highway-mpg">Highway MPG:</label>
+                    <input type="number" class="form-control" name="highway-mpg" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="bore">Bore:</label>
+                    <input type="number" class="form-control" name="bore" step="0.01" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="stroke">Stroke:</label>
+                    <input type="number" class="form-control" name="stroke" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="peak-rpm">Peak RPM:</label>
+                    <input type="number" class="form-control" name="peak-rpm" step="0.01" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="normalized-losses">Normalized Losses:</label>
+                    <input type="number" class="form-control" name="normalized-losses" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="symboling">Symboling:</label>
+                    <input type="number" class="form-control" name="symboling" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="wheel-base">Wheel Base:</label>
+                    <input type="number" class="form-control" name="wheel-base" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="length">Length:</label>
+                    <input type="number" class="form-control" name="length" step="0.01" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="height">Height:</label>
+                    <input type="number" class="form-control" name="height" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="width">Width:</label>
+                    <input type="number" class="form-control" name="width" step="0.01" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="curb-weight">Curb Weight:</label>
+                    <input type="number" class="form-control" name="curb-weight" step="0.01" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Predict</button>
+        </form>
+
+        {% if predicted_price %}
+        <div class="alert alert-success mt-4">
+            <h4>Predicted Price: ${{ predicted_price }}</h4>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
